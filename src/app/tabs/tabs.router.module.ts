@@ -15,7 +15,8 @@ const routes: Routes = [
       {
         path: "profile",
         loadChildren: "../profile/profile.module#ProfilePageModule"
-      }
+      },
+      { path: "post/:id", loadChildren: "../post/post.module#PostPageModule" }
     ]
   }
 ];
@@ -24,4 +25,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TabsRoutingModule {}
+export class TabsRoutingModule {} 

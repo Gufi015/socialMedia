@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UserService } from '../user.service';
@@ -11,10 +12,16 @@ export class ProfilePage implements OnInit {
   userPost;
   post;
 
-  constructor(private afstore: AngularFirestore, private user: UserService) {
+  constructor(private afstore: AngularFirestore, private user: UserService,
+    private router:Router) {
     const post = this.afstore.doc(`users/${user.getUID()}`);
     this.userPost = post.valueChanges();
   }
 
   ngOnInit() {}
+
+  goTo(postID: string){
+    this.router.navigate(['/tabs/post/' + postID]);
+    console.log(postID);
+  }
 }
