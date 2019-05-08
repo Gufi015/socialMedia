@@ -1,9 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>uploader</ion-title>
+    <ion-title>Upload Image</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <div class="camara"></div>
+
+  <input type="file" (change)="fileChange($event)">
+
+  <img *ngIf="imageURL" src="https://ucarecdn.com/{{imageURL}}/">
 
 </ion-content>
