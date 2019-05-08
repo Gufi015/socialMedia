@@ -7,13 +7,14 @@
 <ion-content padding>
   <app-loading *ngIf="!post"></app-loading>
   <ion-card *ngIf="post as postData">
-    <ion-img src="https://ucarecdn.com/{{postID}}/"></ion-img>
+    <ion-img padding src="https://ucarecdn.com/{{postID}}/"></ion-img>
     <ion-card-content>
       <p>{{postData.desc}}</p>
+      <ion-item (click)="like()">
+        <ion-icon [name]="heartType"></ion-icon>
+      </ion-item>
+
     </ion-card-content>
-    <ion-item (click)="like()">
-      <ion-icon [name]="heartType"></ion-icon>
-    </ion-item>
 
   </ion-card>
 

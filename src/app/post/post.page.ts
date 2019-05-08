@@ -33,7 +33,7 @@ export class PostPage implements OnInit {
       this.post = val;
       this.heartType = val.likes.includes(this.user.getUID())
         ? "heart"
-        : "heartEmpty";
+        : "heart-empty"
     });
 
     console.log(this.post);

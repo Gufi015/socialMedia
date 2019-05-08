@@ -6,7 +6,7 @@
 
 <ion-content>
   <div id="images">
-    <div class="image" *ngFor=" let posts of (userPost | async).post">
+    <div class="image" *ngFor=" let posts of (userPost | async)?.post as post">
       <ion-card (click)="goTo(posts)">
         <ion-img src=" https://ucarecdn.com/{{posts}}/-/scale_crop/200x200/center/"> </ion-img>
       </ion-card>
