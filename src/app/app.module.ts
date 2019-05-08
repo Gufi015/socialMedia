@@ -1,3 +1,4 @@
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -14,6 +15,7 @@ import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { HttpModule} from '@angular/http';
 import { UserService } from './user.service';
+import { AuthService } from './auth.service';
 
 
 @NgModule({
@@ -25,13 +27,15 @@ import { UserService } from './user.service';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    AngularFirestoreModule,
     HttpModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    UserService
+    UserService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

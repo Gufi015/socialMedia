@@ -1,9 +1,11 @@
+
 import { Component, OnInit } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { auth } from "firebase/app";
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { AngularFireStore } from '@angular/fire/firestore';
+import { UserService } from "../user.service";
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: "app-registrar",
@@ -13,19 +15,23 @@ import { AngularFireStore } from '@angular/fire/firestore';
 export class RegistrarPage implements OnInit {
   usuario: string = "";
   password: string = "";
-  cPassword: string = "";
+  cPassword:string = "";
 
-  constructor(private afAuth: AngularFireAuth, 
-    private alertController:AlertController,
-    private router:Router,
-    private afstore: AngularFireStore) {}
+
+  constructor(
+    private afAuth: AngularFireAuth,
+    private alertController: AlertController,
+    private router: Router,
+    private afstore: AngularFirestore,
+    private user: UserService
+  ) {}
 
   ngOnInit() {}
 
   async registrar() {
     const { usuario, password, cPassword } = this;
     if (password !== cPassword) {
-      this.showAlert('error!', 'Contraseñas no coinciden!');
+      this.showAlert("error!", "Contraseñas no coinciden!");
       return console.log("Las contraseñas no son iguales");
     }
 
@@ -35,28 +41,33 @@ export class RegistrarPage implements OnInit {
         password
       );
 
+      this.afstore.doc(`users/${res.user.uid}`).set({
+        usuario
+      });
+
       this.user.setUser({
         usuario,
-        uid: res.user.uid,
+        uid: res.user.uid
       });
-      console.log(res);
-      this.showAlert('Succes', 'Bienvenido ' + usuario);
 
-      this.router.navigate(['/tabs']);
+      console.log(res);
+      this.showAlert("Succes", "Bienvenido " + usuario);
+      this.router.navigate(["/tabs"]);
     } catch (error) {
       console.dir(error);
-      this.showAlert('error', error.message);
+      this.showAlert("error", error.message);
     }
   }
 
-  async showAlert(header: string, message:string){
+  async showAlert(header: string, message: string) {
     const alert = await this.alertController.create({
       header,
       message,
-      buttons: ['Ok']
-    })
+      buttons: ["Ok"]
+    });
 
     await alert.present();
-
   }
+
+  
 }
