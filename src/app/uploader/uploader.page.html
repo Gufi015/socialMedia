@@ -5,7 +5,11 @@
 </ion-header>
 
 <ion-content padding>
-  <div class="center">
+  <app-loading *ngIf="busy"></app-loading>
+  <!-- <div>
+    <h1 style="text-align: center;">Publicar Foto!</h1>
+  </div> -->
+  <div class="center" *ngIf="!busy">
     <div class="camara"></div>
 
     <input type="file" *ngIf="!imageURL" (change)="fileChange($event)" class="filebtn" #filebtn>
@@ -15,7 +19,8 @@
       <img src="https://ucarecdn.com/{{imageURL}}/">
       <ion-card-content>
         <ion-textarea placeholder="Que estas Pensando..." [(ngModel)]="descripcion"></ion-textarea>
-        <ion-button shape="round" color="primary" (click)="createPost()">Post</ion-button>
+        <ion-button shape="round" color="primary" (click)="createPost()">Publicar</ion-button>
+        <ion-button style="align-items: flex-end" shape="round" color="danger" (click)="cancelar()">cancelar</ion-button>
       </ion-card-content>
     </ion-card>
   </div>
