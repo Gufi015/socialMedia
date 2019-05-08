@@ -3,6 +3,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { auth } from "firebase/app";
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AngularFireStore } from '@angular/fire/firestore';
 
 @Component({
   selector: "app-registrar",
@@ -16,7 +17,8 @@ export class RegistrarPage implements OnInit {
 
   constructor(private afAuth: AngularFireAuth, 
     private alertController:AlertController,
-    private router:Router) {}
+    private router:Router,
+    private afstore: AngularFireStore) {}
 
   ngOnInit() {}
 
@@ -32,6 +34,11 @@ export class RegistrarPage implements OnInit {
         usuario + "@guf.com",
         password
       );
+
+      this.user.setUser({
+        usuario,
+        uid: res.user.uid,
+      });
       console.log(res);
       this.showAlert('Succes', 'Bienvenido ' + usuario);
 

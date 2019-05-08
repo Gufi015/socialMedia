@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { auth } from "firebase/app";
+import { UserService } from '../user.service';
 
 @Component({
   selector: "app-login",
@@ -14,10 +15,11 @@ export class LoginPage implements OnInit {
   password: string = "";
 
   constructor(private afAuth: AngularFireAuth,
-    private alertController:AlertController,
-    private router:Router) {}
+    private alertController: AlertController,
+    private router: Router,
+    private user: UserService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   async login() {
     const { usuario, password } = this;
@@ -25,17 +27,25 @@ export class LoginPage implements OnInit {
       const res = await this.afAuth.auth.signInWithEmailAndPassword(
         usuario + "@guf.com",
         password
-      ); 
+      );
       console.log(res);
-      this.router.navigate(['/tabs']);
-
+      if (res.user) {
+        this.user.setUser({
+          usuario,
+          uid: res.user.uid,
+        });
+        this.router.navigate(['/tabs']);
+      }
     } catch (error) {
       console.dir(error);
       this.showAlert('error', error.message);
+      if (error.code === 'auth/user-not-found') {
+        console.log('Usuario no encontrado');
+      }
     }
   }
 
-  async showAlert(header:string, message:string){
+  async showAlert(header: string, message: string) {
     const alert = await this.alertController.create({
       header,
       message,

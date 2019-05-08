@@ -13,6 +13,7 @@ import { AngularFireModule} from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { HttpModule} from '@angular/http';
+import { UserService } from './user.service';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { HttpModule} from '@angular/http';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    UserService
   ],
   bootstrap: [AppComponent]
 })
