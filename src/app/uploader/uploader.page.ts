@@ -15,6 +15,16 @@ export class UploaderPage implements OnInit {
   imageURL: string;
   descripcion: string = "";
   busy: boolean = false;
+  scaleCrop: string = '-/scale_crop/200x200';
+
+  effects = {
+    effect1: '',
+    effect2: '-/exposure/50/-/saturation/50/-/warmth/-30/',
+    effect3: '-/filter/vevera/150/',
+    effect4: '-/filter/carris/150/',
+    effect5: '-/filter/misiara/150/'
+  };
+  activeEffect: string = this.effects.effect1;
 
   @ViewChild("filebtn") filebtn;
 
@@ -42,7 +52,7 @@ export class UploaderPage implements OnInit {
       .subscribe(event => {
         console.log(event);
         this.imageURL = event.json().file;
-        console.log('Esta es la url ' + this.imageURL);
+        console.log("Esta es la url " + this.imageURL);
       });
 
     this.busy = false;
@@ -78,8 +88,12 @@ export class UploaderPage implements OnInit {
     this.filebtn.nativeElement.click();
   }
 
-  cancelar(){
-     this.imageURL = "";
-     this.descripcion = "";
+  cancelar() {
+    this.imageURL = "";
+    this.descripcion = "";
+  }
+
+  selectEfect(effect: string) {
+    this.activeEffect = this.effects[effect];
   }
 }

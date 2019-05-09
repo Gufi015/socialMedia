@@ -13,15 +13,45 @@
     <div class="camara"></div>
 
     <input type="file" *ngIf="!imageURL" (change)="fileChange($event)" class="filebtn" #filebtn>
-    <ion-button shape="round" color="primary" (click)="uploadFile()" *ngIf="!imageURL" fill="outline">Subir Imagen</ion-button>
+    <ion-button shape="round" color="primary" (click)="uploadFile()" *ngIf="!imageURL" fill="outline">Subir Imagen
+    </ion-button>
 
-    <ion-card *ngIf="imageURL">
-      <img src="https://ucarecdn.com/{{imageURL}}/">
-      <ion-card-content>
-        <ion-textarea placeholder="Que estas Pensando..." [(ngModel)]="descripcion"></ion-textarea>
-        <ion-button shape="round" color="primary" (click)="createPost()">Publicar</ion-button>
-        <ion-button style="align-items: flex-end" shape="round" color="danger" (click)="cancelar()">cancelar</ion-button>
-      </ion-card-content>
-    </ion-card>
+    <div *ngIf="imageURL">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-img src="https://ucarecdn.com/{{ imageURL }}/-/preview/{{ activeEffect }}/"></ion-img>
+            <ion-card-content>
+              <ion-textarea placeholder="Que estas Pensando..." [(ngModel)]="descripcion"></ion-textarea>
+              <ion-row>
+                <ion-col>
+                  <ion-button shape="round" color="primary" (click)="createPost()">Publicar</ion-button>
+                </ion-col>
+                <ion-col>
+                  <ion-button style="align-items: flex-end" shape="round" color="danger" (click)="cancelar()">Cancelar</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col (click)="selectEfect('effect1')">
+            <ion-img src="https://ucarecdn.com/{{ imageURL }}/{{ scaleCrop }}/"></ion-img>
+          </ion-col>
+          <ion-col (click)="selectEfect('effect2')">
+            <ion-img src="https://ucarecdn.com/{{ imageURL }}/{{ scaleCrop }}/{{ effects.effect2 }}"></ion-img>
+          </ion-col>
+          <ion-col (click)="selectEfect('effect3')">
+            <ion-img src="https://ucarecdn.com/{{ imageURL }}/{{ scaleCrop }}/{{ effects.effect3 }}"></ion-img>
+          </ion-col>
+          <ion-col (click)="selectEfect('effect4')">
+            <ion-img src="https://ucarecdn.com/{{ imageURL }}/{{ scaleCrop }}/{{ effects.effect4 }}"></ion-img>
+          </ion-col>
+          <ion-col (click)="selectEfect('effect5')">
+            <ion-img src="https://ucarecdn.com/{{ imageURL }}/{{ scaleCrop }}/{{ effects.effect5 }}"></ion-img>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
   </div>
 </ion-content>
