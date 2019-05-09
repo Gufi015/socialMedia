@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Upload Image</ion-title>
+    <ion-title>Cargar Imagen!</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -16,7 +16,7 @@
     <ion-button shape="round" color="primary" (click)="uploadFile()" *ngIf="!imageURL" fill="outline">Subir Imagen
     </ion-button>
 
-    <div *ngIf="imageURL">
+    <div *ngIf="imageURL" class="container">
       <ion-grid>
         <ion-row>
           <ion-col size="12">
@@ -35,20 +35,25 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col (click)="selectEfect('effect1')">
+          <ion-col [class.active]="activeEffect === effects.effect1" (click)="selectEfect('effect1')">
             <ion-img src="https://ucarecdn.com/{{ imageURL }}/{{ scaleCrop }}/"></ion-img>
           </ion-col>
-          <ion-col (click)="selectEfect('effect2')">
+          <ion-col [class.active]="activeEffect === effects.effect2" (click)="selectEfect('effect2')">
             <ion-img src="https://ucarecdn.com/{{ imageURL }}/{{ scaleCrop }}/{{ effects.effect2 }}"></ion-img>
           </ion-col>
-          <ion-col (click)="selectEfect('effect3')">
+          <ion-col [class.active]="activeEffect === effects.effect3" (click)="selectEfect('effect3')">
             <ion-img src="https://ucarecdn.com/{{ imageURL }}/{{ scaleCrop }}/{{ effects.effect3 }}"></ion-img>
           </ion-col>
-          <ion-col (click)="selectEfect('effect4')">
+          <ion-col [class.active]="activeEffect === effects.effect4" (click)="selectEfect('effect4')">
             <ion-img src="https://ucarecdn.com/{{ imageURL }}/{{ scaleCrop }}/{{ effects.effect4 }}"></ion-img>
           </ion-col>
-          <ion-col (click)="selectEfect('effect5')">
+          <ion-col [class.active]="activeEffect === effects.effect5" (click)="selectEfect('effect5')">
             <ion-img src="https://ucarecdn.com/{{ imageURL }}/{{ scaleCrop }}/{{ effects.effect5 }}"></ion-img>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="noFace">
+          <ion-col size="12">
+            <p class="no-face"> No hay rostro!</p>
           </ion-col>
         </ion-row>
       </ion-grid>

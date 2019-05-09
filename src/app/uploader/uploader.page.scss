@@ -19,3 +19,18 @@
     justify-content: center;
     align-items: center;
 }
+.container{
+    display: flex;
+    border: 1px blue;
+}
+
+
+.active{
+    border: 2px solid black;
+}
+
+.no-face{
+    font-weight: bold;
+    text-align: center;
+    font-style: italic;
+}

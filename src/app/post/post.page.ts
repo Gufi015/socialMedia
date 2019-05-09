@@ -20,6 +20,9 @@ export class PostPage implements OnInit {
 
   heartType: string = "heart-empty";
 
+
+  effect:string = '';
+
   constructor(
     private route: ActivatedRoute,
     private afs: AngularFirestore,
@@ -31,6 +34,7 @@ export class PostPage implements OnInit {
     this.postReference = this.afs.doc(`posts/${this.postID}`);
     this.sub = this.postReference.valueChanges().subscribe(val => {
       this.post = val;
+      this.effect = val.effect;
       this.heartType = val.likes.includes(this.user.getUID())
         ? "heart"
         : "heart-empty"
