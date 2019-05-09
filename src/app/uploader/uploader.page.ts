@@ -95,18 +95,21 @@ export class UploaderPage implements OnInit {
     this.http.post("https://upload.uploadcare.com/base/", data).subscribe(
       event => {
         console.log(event);
-        if (event.status == 404) {
-          this.imageURL = "";
-          this.showAlert('Error', 'Error al subir la imagen, por favor volver a intentarlo!');
-        }
+        // if (event.status == 404) {
+        //   this.imageURL = "";
+        //   this.showAlert('Error', 'Error al subir la imagen, por favor volver a intentarlo!');
+        // }
         this.imageURL = event.json().file;
         //console.log("Esta es la url " + this.imageURL);
         this.busy = false;
         this.http
-          .get(`https://ucarecdn.com/${this.imageURL}/detect_faces`)
+          .get(`https://ucarecdn.com/${this.imageURL}/detect_faces/`)
           .subscribe(
             res => {
-              this.noFace = res.json().faces == 0;
+              if(res.status == 404){
+                console.log('No se cargo la url correctamente');
+              }
+              this.noFace = res.json().faces === 0;
             },
             error => {
               console.log(error);
@@ -116,6 +119,10 @@ export class UploaderPage implements OnInit {
       error => {
         console.error(error);
         this.busy = false;
+        // this.showAlert(
+        //   "Error",
+        //   "Error al subir la imagen, por favor volver a intentarlo!"
+        // );
       }
     );
   }

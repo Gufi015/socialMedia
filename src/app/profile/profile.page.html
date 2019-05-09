@@ -1,16 +1,36 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-title>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div id="images">
-    <div class="image" *ngFor=" let posts of (userPost | async)?.post as post">
+
+  <app-loading *ngIf="!post"></app-loading>
+  <div id="frofile-info">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4" class="user-image">
+          <ion-img src="https://ucarecdn.com/{{profilePic}}/-/scale_crop/200x200/center/"></ion-img>
+        </ion-col>
+        <ion-col size="8">
+          <p>{{ usuario }}</p>
+          <ion-button shape="round" routerLink="/tabs/edit-profile">Editar Perfil</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div id="images" *ngIf="post">
+    <!-- <div class="image" *ngFor=" let posts of (userPost | async)?.post as post">
       <ion-card (click)="goTo(posts)">
-        <ion-img src=" https://ucarecdn.com/{{posts}}/-/scale_crop/200x200/center/"> </ion-img>
+        <ion-img src="https://ucarecdn.com/{{posts}}/-/scale_crop/200x200/center/"> </ion-img>
+      </ion-card>
+    </div> -->
+    <div class="image" *ngFor=" let posts of post">
+      <ion-card (click)="goTo(posts)">
+        <ion-img src="https://ucarecdn.com/{{posts}}/-/scale_crop/200x200/center/"> </ion-img>
       </ion-card>
     </div>
   </div>
-
+ 
 </ion-content> 
