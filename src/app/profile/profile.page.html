@@ -11,10 +11,10 @@
     <ion-grid>
       <ion-row>
         <ion-col size="4" class="user-image">
-          <ion-img src="https://ucarecdn.com/{{profilePic}}/-/scale_crop/200x200/center/"></ion-img>
+          <ion-img src="https://ucarecdn.com/{{ profilePic }}/-/scale_crop/200x200/center/"></ion-img>
         </ion-col>
         <ion-col size="8">
-          <p>{{ usuario }}</p>
+          <h3 style="font-style: italic">Usuario:{{ usuario | uppercase }}</h3>
           <ion-button shape="round" routerLink="/tabs/edit-profile">Editar Perfil</ion-button>
         </ion-col>
       </ion-row>

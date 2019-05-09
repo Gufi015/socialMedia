@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { first } from "rxjs/operators";
+import { auth } from 'firebase/app'
 
 interface user {
   usuario: string;
@@ -43,7 +44,7 @@ export class UserService {
 
     if (user) {
       this.setUser({
-        usuario: user.email.split('@')[0],
+        usuario: user.email.split("@")[0],
         uid: user.uid
       });
       return true;
@@ -53,5 +54,19 @@ export class UserService {
 
   getName(): string {
     return this.user.usuario;
+  }
+
+  reAuth(usuario: string, password: string) {
+    return this.afAuth.auth.currentUser.reauthenticateWithCredential(
+      auth.EmailAuthProvider.credential(usuario + "@guf.com", password)
+    );
+  }
+
+  updatePass(newPassword:string) {
+    return this.afAuth.auth.currentUser.updatePassword(newPassword);
+  }
+
+  updateEmail(usuario:string){
+    return this.afAuth.auth.currentUser.updateEmail(usuario + "@guf.com");
   }
 }

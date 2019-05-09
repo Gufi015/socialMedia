@@ -1,9 +1,35 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>edit-profile</ion-title>
+    <ion-title>Editar Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+
+  <app-loading *ngIf="busy"></app-loading>
+  <div *ngIf="!busy">
+    <input type="file" #fileBtn class="fileBtn" (change)="cargarFoto($event)">
+    <div>
+      <ion-img class="profile-pic" (click)="cargarFotoPerfil()" src="https://ucarecdn.com/{{fotoPerfil}}/-/scale_crop/200x200/center/">
+      </ion-img>
+    </div>
+
+    <div class="profile-info">
+      <ion-item>
+        <ion-label position="floating">Usuario:</ion-label>
+        <ion-input [(ngModel)]="usuario"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Nueva Contraseña:</ion-label>
+        <ion-input [(ngModel)]="newPassword"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña Anterior:</ion-label>
+        <ion-input [(ngModel)]="password"></ion-input>
+      </ion-item>
+      <ion-button fill="solid" expand="block" color="dark" (click)="actualizarPerfil()">GuardarCambios</ion-button>
+
+    </div>
+  </div>
 
 </ion-content>
