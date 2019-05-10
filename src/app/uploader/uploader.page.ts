@@ -106,9 +106,9 @@ export class UploaderPage implements OnInit {
           .get(`https://ucarecdn.com/${this.imageURL}/detect_faces`)
           .subscribe(
             res => {
-              if(res.status == 404){
+              /*if(res.status == 404){
                 console.log('No se cargo la url correctamente');
-              }
+            }*/
               this.noFace = res.json().faces === 0;
             },
             (error) => {

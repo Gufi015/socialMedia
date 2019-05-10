@@ -69,4 +69,8 @@ export class UserService {
   updateEmail(usuario:string){
     return this.afAuth.auth.currentUser.updateEmail(usuario + "@guf.com");
   }
+
+  logout(){
+    this.afAuth.auth.signOut();
+  }
 }

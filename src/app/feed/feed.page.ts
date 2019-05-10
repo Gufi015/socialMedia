@@ -3,7 +3,8 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import { UserService } from '../user.service';
 import { firestore } from "firebase/app";
-import { post } from 'selenium-webdriver/http';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: "app-feed",
@@ -17,7 +18,8 @@ export class FeedPage implements OnInit {
   sub;
 
   constructor(private aff: AngularFireFunctions,
-    private user: UserService) {}
+    private user: UserService,
+    private router:Router) {}
 
   ngOnInit() {
     const getFeed = this.aff.httpsCallable('getfeed');
@@ -44,5 +46,10 @@ export class FeedPage implements OnInit {
         likes: firestore.FieldValue.arrayRemove(this.user.getUID())
       });
     }
+  }
+  salir(){
+    this.user.logout();
+    console.log('logout');
+    this.router.navigate(['/login']);
   }
 }
