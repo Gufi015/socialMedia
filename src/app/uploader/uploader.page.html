@@ -24,12 +24,8 @@
             <ion-card-content>
               <ion-textarea placeholder="Que estas Pensando..." [(ngModel)]="descripcion"></ion-textarea>
               <ion-row>
-                <ion-col>
-                  <ion-button shape="round" color="primary" (click)="createPost()">Publicar</ion-button>
-                </ion-col>
-                <ion-col>
-                  <ion-button style="align-items: flex-end" shape="round" color="danger" (click)="cancelar()">Cancelar</ion-button>
-                </ion-col>
+                <ion-button shape="round" color="primary" (click)="createPost()">Publicar</ion-button>
+                <ion-button style="align-items: right; right: 5px;" shape="round" color="danger" (click)="cancelar()">Cancelar</ion-button>
               </ion-row>
             </ion-card-content>
           </ion-col>

@@ -1,17 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-row>
-      <ion-col size="6">
-        <!-- <ion-title>Time line</ion-title> -->
-        <h1>Time Line</h1>
-      </ion-col>
-      <ion-col size="6">
-        <ion-button style="align-items: right; float: right;" shape="round" color="danger" (click)="salir()">Salir
-        </ion-button>
-      </ion-col>
-    </ion-row>
-
-
+    <ion-title>Time line</ion-title>
+    <ion-button style="float: right;" (click)="salir()">
+      <ion-icon name="log-out"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -25,7 +17,7 @@
       <ion-img padding src="https://ucarecdn.com/{{post.postID}}/-/preview/{{post.effect}}"></ion-img>
       <ion-card-content>
         <p style="text-justify: auto; text-align: center; font-style: italic;">{{post.desc}}</p>
-        <ion-item >
+        <ion-item>
           <ion-icon (click)="like()" [name]="heartType"></ion-icon>
         </ion-item>
 

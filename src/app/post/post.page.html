@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>post</ion-title>
+    <ion-title>Nuevo Post</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,7 +9,7 @@
   <ion-card *ngIf="post as postData">
     <ion-img padding src="https://ucarecdn.com/{{postID}}/-/preview/{{effect}}/"></ion-img>
     <ion-card-content>
-      <p>{{postData.desc}}</p>
+      <p style="font-size: 30px; font-style: italic">{{postData.desc}}</p>
       <ion-item (click)="like()">
         <ion-icon [name]="heartType"></ion-icon>
       </ion-item>

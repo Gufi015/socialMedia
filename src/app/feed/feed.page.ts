@@ -1,3 +1,4 @@
+import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
@@ -17,28 +18,37 @@ export class FeedPage implements OnInit {
   postReference: AngularFirestoreDocument;
   sub;
 
-  constructor(private aff: AngularFireFunctions,
+  constructor(
+    private aff: AngularFireFunctions,
     private user: UserService,
-    private router:Router) {}
+    private router: Router,
+    private alertController:AlertController
+  ) {}
 
   ngOnInit() {
-    const getFeed = this.aff.httpsCallable('getfeed');
+    const getFeed = this.aff.httpsCallable("getfeed");
     this.sub = getFeed({}).subscribe(data => {
       console.log(data);
       this.posts = data;
 
       const datas = this.posts.effect;
 
-      console.log('no esta definida '+ "https://ucarecdn.com/"+this.posts.postID+"/-/preview/"+datas);
+      console.log(
+        "no esta definida " +
+          "https://ucarecdn.com/" +
+          this.posts.postID +
+          "/-/preview/" +
+          datas
+      );
     });
   }
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.sub.unsubscribe();
   }
 
   like() {
     //this.heartType = this.heartType == "heart" ? "heart-empty" : "heart";
-    console.log('click like');
+    console.log("click like");
     if (this.heartType == "heart-empty") {
       this.postReference.update({
         likes: firestore.FieldValue.arrayUnion(this.user.getUID())
@@ -49,9 +59,19 @@ export class FeedPage implements OnInit {
       });
     }
   }
-  salir(){
-    this.user.logout();
-    console.log('logout');
-    this.router.navigate(['/login']); 
+  async salir() {
+    const alert = await this.alertController.create({
+      header:'Estas Seguro que deseas salir de la APP?',
+      message: '',
+      buttons: [{ text:'SI', role: 'cancel', handler: ()=>{
+        this.user.logout();
+        this.router.navigate(["/login"]);
+      }},{
+        text: 'NO'
+      }]
+    });
+    await alert.present();
+    // console.log("logout");
+    // this.router.navigate(["/login"]);
   }
 }
