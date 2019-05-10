@@ -30,7 +30,7 @@ export class ProfilePage implements OnInit {
       this.post = event.post;
       this.usuario = event.usuario;
       this.profilePic = event.profilePic;
-      console.log(this.profilePic);
+      console.log('image ' + this.profilePic);
     });
   }
 

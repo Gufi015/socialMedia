@@ -7,6 +7,7 @@ import {
   AngularFirestoreDocument
 } from "@angular/fire/firestore";
 import { UserService } from "../user.service";
+import { timeout } from 'rxjs/operators';
 
 @Component({
   selector: "app-edit-profile",
@@ -58,7 +59,9 @@ export class EditProfilePage implements OnInit {
     this.fileBtn.nativeElement.click();
   }
 
+
   cargarFoto(event) {
+    
     const files = event.target.files;
 
     const data = new FormData();
@@ -66,7 +69,8 @@ export class EditProfilePage implements OnInit {
     data.append("UPLOADCARE_STORE", "1");
     data.append("UPLOADCARE_PUB_KEY", "1f5270cc7aee29733cf4");
 
-    this.http.post("https://upload.uploadcare.com/base/", data).subscribe(
+    setTimeout(() => {
+      this.http.post("https://upload.uploadcare.com/base/", data).subscribe(
       event => {
         console.log('image' + event);
         const uuid = event.json().file;
@@ -78,7 +82,8 @@ export class EditProfilePage implements OnInit {
       error => {
         console.error(error);
       }
-    );
+    )}, 5000);
+    
   }
   async actualizarPerfil() {
     this.busy = true;
@@ -97,6 +102,7 @@ export class EditProfilePage implements OnInit {
 
     if (this.newPassword) {
       //return this.showAlert("Error", "Tienes que ingresar tu nueva contraseña");
+      this.busy = false;
       await this.user.updatePass(this.newPassword);
     }
 
@@ -105,6 +111,7 @@ export class EditProfilePage implements OnInit {
       this.mainUser.update({
         usuario: this.usuario
       });
+      this.busy = false;
     }
 
     this.password = "";

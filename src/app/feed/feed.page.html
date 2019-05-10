@@ -2,31 +2,36 @@
   <ion-toolbar>
     <ion-row>
       <ion-col size="6">
-        <ion-title>Time line</ion-title>
+        <!-- <ion-title>Time line</ion-title> -->
+        <h1>Time Line</h1>
       </ion-col>
       <ion-col size="6">
-        <ion-button style="align-items: right; float: right;" shape="round" color="danger" (click)="salir()">Salir</ion-button>
+        <ion-button style="align-items: right; float: right;" shape="round" color="danger" (click)="salir()">Salir
+        </ion-button>
       </ion-col>
     </ion-row>
-    
-    
+
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+
+  <app-loading *ngIf="!posts"></app-loading>
+
   <div *ngIf="posts">
-  <ion-card *ngFor="let post of posts">
-    <ion-img padding src="https://ucarecdn.com/{{post.postID}}/-/preview/{{post.effect}}"></ion-img>
-    <ion-card-content>
-      <p>{{post.desc}}</p>
-      <ion-item (click)="like()">
-        <ion-icon [name]="heartType"></ion-icon>
-      </ion-item>
+    <ion-card *ngFor="let post of posts">
+      <p style="text-align: center; font-style: italic">Post de: {{post.autor | uppercase}}</p>
+      <ion-img padding src="https://ucarecdn.com/{{post.postID}}/-/preview/{{post.effect}}"></ion-img>
+      <ion-card-content>
+        <p style="text-justify: auto; text-align: center; font-style: italic;">{{post.desc}}</p>
+        <ion-item >
+          <ion-icon (click)="like()" [name]="heartType"></ion-icon>
+        </ion-item>
 
-    </ion-card-content>
+      </ion-card-content>
 
-  </ion-card>
+    </ion-card>
   </div>
 
 </ion-content>
- 

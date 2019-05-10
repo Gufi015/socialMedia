@@ -27,7 +27,9 @@ export class FeedPage implements OnInit {
       console.log(data);
       this.posts = data;
 
-      console.log("https://ucarecdn.com/"+this.posts.postID+"/-/preview/"+this.posts.effect);
+      const datas = this.posts.effect;
+
+      console.log('no esta definida '+ "https://ucarecdn.com/"+this.posts.postID+"/-/preview/"+datas);
     });
   }
   ngOnDestroy(){
@@ -36,7 +38,7 @@ export class FeedPage implements OnInit {
 
   like() {
     //this.heartType = this.heartType == "heart" ? "heart-empty" : "heart";
-
+    console.log('click like');
     if (this.heartType == "heart-empty") {
       this.postReference.update({
         likes: firestore.FieldValue.arrayUnion(this.user.getUID())
@@ -50,6 +52,6 @@ export class FeedPage implements OnInit {
   salir(){
     this.user.logout();
     console.log('logout');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login']); 
   }
 }

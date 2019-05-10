@@ -92,39 +92,41 @@ export class UploaderPage implements OnInit {
     data.append("UPLOADCARE_STORE", "1");
     data.append("UPLOADCARE_PUB_KEY", "1f5270cc7aee29733cf4");
 
-    this.http.post("https://upload.uploadcare.com/base/", data).subscribe(
-      event => {
-        console.log(event);
-        // if (event.status == 404) {
-        //   this.imageURL = "";
-        //   this.showAlert('Error', 'Error al subir la imagen, por favor volver a intentarlo!');
-        // }
-        this.imageURL = event.json().file;
-        //console.log("Esta es la url " + this.imageURL);
-        this.busy = false;
-        this.http
-          .get(`https://ucarecdn.com/${this.imageURL}/detect_faces`)
-          .subscribe(
-            res => {
-              /*if(res.status == 404){
+    setTimeout(() => {
+      this.http.post("https://upload.uploadcare.com/base/", data).subscribe(
+        event => {
+          console.log(event);
+          // if (event.status == 404) {
+          //   this.imageURL = "";
+          //   this.showAlert('Error', 'Error al subir la imagen, por favor volver a intentarlo!');
+          // }
+          this.imageURL = event.json().file;
+          //console.log("Esta es la url " + this.imageURL);
+          this.busy = false;
+          this.http
+            .get(`https://ucarecdn.com/${this.imageURL}/detect_faces/`)
+            .subscribe(
+              res => {
+                /*if(res.status == 404){
                 console.log('No se cargo la url correctamente');
             }*/
-              this.noFace = res.json().faces === 0;
-            },
-            (error) => {
-              console.log(error);
-            }
-          );
-      },
-      error => {
-        console.error(error);
-        this.busy = false;
-        // this.showAlert(
-        //   "Error",
-        //   "Error al subir la imagen, por favor volver a intentarlo!"
-        // );
-      }
-    );
+                this.noFace = res.json().faces === 0;
+              },
+              error => {
+                console.log(error);
+              }
+            );
+        },
+        error => {
+          console.error(error);
+          this.busy = false;
+          // this.showAlert(
+          //   "Error",
+          //   "Error al subir la imagen, por favor volver a intentarlo!"
+          // );
+        }
+      );
+    }, 500);
   }
 
   async showAlert(header: string, message: string) {

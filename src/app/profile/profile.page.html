@@ -6,7 +6,6 @@
 
 <ion-content>
 
-  <app-loading *ngIf="!post"></app-loading>
   <div id="frofile-info" >
     <ion-grid>
       <ion-row>
@@ -20,7 +19,7 @@
       </ion-row>
     </ion-grid>
   </div>
-  <div id="images" *ngIf="post">
+  <div id="images">
     <!-- <div class="image" *ngFor=" let posts of (userPost | async)?.post as post">
       <ion-card (click)="goTo(posts)">
         <ion-img src="https://ucarecdn.com/{{posts}}/-/scale_crop/200x200/center/"> </ion-img>
