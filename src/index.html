@@ -18,6 +18,16 @@
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <script>
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    function onDeviceReady() {
+      document.addEventListener("backbutton", function (e) {
+        e.preventDefault();
+        console.log("hello");
+      }, false);
+    }
+  </script>
 </head>
 
 <body>

@@ -1,0 +1,7 @@
+{
+  "appId": "guf.cion.com",
+  "appName": "socialMedia",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}

@@ -23,13 +23,13 @@ import { AngularFireFunctionsModule, FunctionsRegionToken } from '@angular/fire/
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({hardwareBackButton: false}),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
     HttpModule,
-    AngularFireFunctionsModule
+    AngularFireFunctionsModule,
   ],
   providers: [
     StatusBar,
