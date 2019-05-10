@@ -1,9 +1,24 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>feed</ion-title>
+    <ion-title>Time line</ion-title>
+    <ion-button style="align-items: right; float: right;" shape="round" color="danger" routerLink="/login">Salir</ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <div *ngIf="posts">
+  <ion-card *ngFor="let post of posts">
+    <ion-img padding src="https://ucarecdn.com/{{post.postID}}/-/preview/{{post.effect}}"></ion-img>
+    <ion-card-content>
+      <p>{{post.desc}}</p>
+      <ion-item (click)="like()">
+        <ion-icon [name]="heartType"></ion-icon>
+      </ion-item>
+
+    </ion-card-content>
+
+  </ion-card>
+  </div>
 
 </ion-content>
+ 

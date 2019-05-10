@@ -103,7 +103,7 @@ export class UploaderPage implements OnInit {
         //console.log("Esta es la url " + this.imageURL);
         this.busy = false;
         this.http
-          .get(`https://ucarecdn.com/${this.imageURL}/detect_faces/`)
+          .get(`https://ucarecdn.com/${this.imageURL}/detect_faces`)
           .subscribe(
             res => {
               if(res.status == 404){
@@ -111,7 +111,7 @@ export class UploaderPage implements OnInit {
               }
               this.noFace = res.json().faces === 0;
             },
-            error => {
+            (error) => {
               console.log(error);
             }
           );
