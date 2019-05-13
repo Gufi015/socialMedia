@@ -1,11 +1,12 @@
-import { AlertController } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
-import { AngularFireFunctions } from '@angular/fire/functions';
-import { AngularFirestoreDocument } from '@angular/fire/firestore';
-import { UserService } from '../user.service';
+import { AlertController } from "@ionic/angular";
+import { Component, OnInit } from "@angular/core";
+import { AngularFireFunctions } from "@angular/fire/functions";
+import { AngularFirestoreDocument } from "@angular/fire/firestore";
+import { UserService } from "../user.service";
 import { firestore } from "firebase/app";
-import { Router } from '@angular/router';
-
+import { Router } from "@angular/router";
+import { timer } from "rxjs/observable/timer";
+import { switchMap } from "rxjs/operators";
 
 @Component({
   selector: "app-feed",
@@ -22,10 +23,11 @@ export class FeedPage implements OnInit {
     private aff: AngularFireFunctions,
     private user: UserService,
     private router: Router,
-    private alertController:AlertController
+    private alertController: AlertController
   ) {}
 
   ngOnInit() {
+    
     const getFeed = this.aff.httpsCallable("getfeed");
     this.sub = getFeed({}).subscribe(data => {
       console.log(data);
@@ -41,6 +43,24 @@ export class FeedPage implements OnInit {
           datas
       );
     });
+
+    // const getFeed = this.aff.httpsCallable("getfeed");
+    // const timeInterval = 3000;
+    // return timer(0, timeInterval).subscribe(() =>{
+    //   getFeed({}).subscribe(data => {
+    //     console.log(data);
+    //     this.posts = data;
+    //     const datas = this.posts.effect;
+    //     console.log(
+    //       "no esta definida " +
+    //         "https://ucarecdn.com/" +
+    //         this.posts.postID +
+    //         "/-/preview/" +
+    //         datas
+    //     );
+    //   });
+    // });
+
   }
   ngOnDestroy() {
     this.sub.unsubscribe();
@@ -61,14 +81,21 @@ export class FeedPage implements OnInit {
   }
   async salir() {
     const alert = await this.alertController.create({
-      header:'Estas Seguro que deseas salir de la APP?',
-      message: '',
-      buttons: [{ text:'SI', role: 'cancel', handler: ()=>{
-        this.user.logout();
-        this.router.navigate(["/login"]);
-      }},{
-        text: 'NO'
-      }]
+      header: "Estas Seguro que deseas salir de la APP?",
+      message: "",
+      buttons: [
+        {
+          text: "SI",
+          role: "cancel",
+          handler: () => {
+            this.user.logout();
+            this.router.navigate(["/login"]);
+          }
+        },
+        {
+          text: "NO"
+        }
+      ]
     });
     await alert.present();
     // console.log("logout");
